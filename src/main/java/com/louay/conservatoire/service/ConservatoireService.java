@@ -23,4 +23,6 @@ public interface ConservatoireService {
 	List<Musicien> findByOrderByNomMusicientAsc();
 	List<Musicien> trierMusiciensNomsSalaire();
 	
+	
+	
 }

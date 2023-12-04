@@ -37,7 +37,7 @@ public class Image {
 	private Musicien musicien;*/
 	
 	@ManyToOne
-	 @JoinColumn (name="MUSICIEN_ID")
+	 @JoinColumn (name="musicien_id")
 	 @JsonIgnore
 	 private Musicien musicien;
 }

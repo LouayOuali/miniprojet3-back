@@ -43,7 +43,7 @@ public class ConservatoireRESTController {
 	}
 
 	@RequestMapping(value = "/delMus/{id}", method = RequestMethod.DELETE)
-	public void deleteMusicien(@PathVariable("id") Long id) {
+	public void deleteMusicienById(@PathVariable("id") Long id) {
 		cs.deleteMusicienById(id);
 	}
 

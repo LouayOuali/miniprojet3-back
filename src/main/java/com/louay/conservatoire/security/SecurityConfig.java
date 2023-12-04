@@ -47,7 +47,7 @@ public class SecurityConfig {
 	          	
 	          	          
 		    .authorizeHttpRequests()
-		    .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER")
+		   .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER")
 		    .requestMatchers("/api/getbyid/**").hasAnyAuthority("ADMIN","USER")
 		    .requestMatchers(HttpMethod.POST,"/api/addMus/").hasAuthority("ADMIN")
 		    .requestMatchers(HttpMethod.PUT,"/api/updateMus/").hasAuthority("ADMIN")
@@ -55,6 +55,7 @@ public class SecurityConfig {
 		    .requestMatchers("/cat/**").hasAnyAuthority("ADMIN","USER")
 		    .anyRequest().authenticated().and()
 		    .addFilterBefore(new JWTAuthorizationFilter(), BasicAuthenticationFilter.class);
+		    
 
 		 return http.build();
 		

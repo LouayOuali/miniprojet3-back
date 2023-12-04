@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.louay.conservatoire.entitites.Band;
+import com.louay.conservatoire.entitites.Image;
 import com.louay.conservatoire.entitites.Musicien;
+import com.louay.conservatoire.repos.ImageRepository;
 import com.louay.conservatoire.repos.MusicienRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class ConservatoireServiceImpl implements ConservatoireService {
 
 	@Autowired
 	MusicienRepository mr;
+	
+	@Autowired
+	ImageRepository ir;
 
 	@Override
 	public Musicien saveMusicien(Musicien m) {
@@ -30,10 +35,7 @@ public class ConservatoireServiceImpl implements ConservatoireService {
 		mr.delete(m);
 	}
 
-	@Override
-	public void deleteMusicienById(Long id) {
-		mr.deleteById(id);
-	}
+	
 
 	@Override
 	public Musicien getMusicien(Long id) {
@@ -79,5 +81,25 @@ public class ConservatoireServiceImpl implements ConservatoireService {
 	public List<Musicien> trierMusiciensNomsSalaire() {
 		return mr.trierMusiciensNomsSalaire();
 	}
+	
+	@Override
+	public void deleteMusicienById(Long id) {
+	    Musicien plat = mr.findById(id).orElse(null);
+
+	    if (plat != null) {
+	        
+	        List<Image> images = plat.getImages();
+	        if (images != null) {
+	            for (Image image : images) {
+	         
+	                ir.deleteById(image.getIdImage()); 
+	            }
+	        }
+
+	        mr.deleteById(id);
+	    }
+	}
+
+	
 
 }
